@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: my-productpage-app
+  name: my-productpage-app
+spec:
+  containers:
+  - env:
+    - name: REVIEWS_HOSTNAME
+      value: 172.17.0.2
+    - name: DETAILS_HOSTNAME
+      value: 172.17.0.4
+    - name: RATINGS_HOSTNAME
+      value: 172.17.0.8
+    image: istio/examples-bookinfo-productpage-v1
+    name: my-productpage-app
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

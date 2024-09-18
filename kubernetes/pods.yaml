@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: my-ratings-app
+  name: my-ratings-app
+spec:
+  containers:
+  - image: istio/examples-bookinfo-ratings-v1
+    name: my-ratings-app
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: my-reviews-app
+  name: my-reviews-app
+spec:
+  containers:
+  - env:
+    - name: RATINGS_HOSTNAME
+      value: 172.17.0.8
+    - name: RATINGS_PORT
+      value: "9080"
+    image: istio/examples-bookinfo-reviews-v2
+    name: my-reviews-app
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: my-details-app
+  name: my-details-app
+spec:
+  containers:
+  - image: istio/examples-bookinfo-details-v2
+    name: my-details-app
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: my-productpage-app
+  name: my-productpage-app
+spec:
+  containers:
+  - env:
+    - name: REVIEWS_HOSTNAME
+      value: 172.17.0.2
+    - name: DETAILS_HOSTNAME
+      value: 172.17.0.4
+    - name: RATINGS_HOSTNAME
+      value: 172.17.0.8
+    image: istio/examples-bookinfo-productpage-v1
+    name: my-productpage-app
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
