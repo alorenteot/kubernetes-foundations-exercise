@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-ratings-app
+  name: my-details-app
   labels:
-    run: my-ratings-app
+    run: my-details-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-ratings-app
+      app: my-details-app
   template:
     metadata:
       labels:
-        app: my-ratings-app
+        app: my-details-app
     spec:
       containers:
-      - name: my-ratings-app
-        image: istio/examples-bookinfo-ratings-v1
+      - name: my-details-app
+        image: istio/examples-bookinfo-details-v2
         resources: {}
       dnsPolicy: ClusterFirst
       restartPolicy: Always

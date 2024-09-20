@@ -1,27 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-reviews-app
+  name: my-productpage-app
   labels:
-    run: my-reviews-app
+    run: my-productpage-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: my-reviews-app
+      app: my-productpage-app
   template:
     metadata:
       labels:
-        app: my-reviews-app
+        app: my-productpage-app
     spec:
       containers:
-      - name: my-reviews-app
-        image: istio/examples-bookinfo-reviews-v3
+      - name: my-productpage-app
+        image: istio/examples-bookinfo-productpage-v1
         resources: {}
         env:
+        - name: REVIEWS_HOSTNAME
+          value: 172.17.0.2
+        - name: DETAILS_HOSTNAME
+          value: 172.17.0.4
         - name: RATINGS_HOSTNAME
           value: 172.17.0.8
-        - name: RATINGS_PORT
-          value: "9080"
       dnsPolicy: ClusterFirst
       restartPolicy: Always
