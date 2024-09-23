@@ -20,7 +20,7 @@ spec:
         resources: {}
         env:
         - name: RATINGS_HOSTNAME
-          value: 172.17.0.8
+          value: ratings-svc
         - name: RATINGS_PORT
           value: "9080"
       dnsPolicy: ClusterFirst

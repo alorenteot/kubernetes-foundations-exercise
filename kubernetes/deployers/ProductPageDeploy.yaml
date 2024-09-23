@@ -20,10 +20,10 @@ spec:
         resources: {}
         env:
         - name: REVIEWS_HOSTNAME
-          value: 172.17.0.2
+          value: reviews-svc
         - name: DETAILS_HOSTNAME
-          value: 172.17.0.4
+          value: details-svc
         - name: RATINGS_HOSTNAME
-          value: 172.17.0.8
+          value: ratings-svc
       dnsPolicy: ClusterFirst
       restartPolicy: Always

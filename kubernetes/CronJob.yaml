@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mi-cronjob
+spec:
+  schedule: "1 * * * *"  
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cronjob-app
+            image: busybox
+            command: 
+            - /bin/bash
+            - c
+            - curl http://reviews-svc:9080/health
+          restartPolicy: OnFailure
