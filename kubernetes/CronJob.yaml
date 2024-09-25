@@ -2,17 +2,19 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: mi-cronjob
+  namespace: dev
 spec:
-  schedule: "1 * * * *"  
+  schedule: "* * * * *"  
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: cronjob-app
-            image: busybox
+            image: curlimages/curl:7.72.0
             command: 
-            - /bin/bash
-            - c
-            - curl http://reviews-svc:9080/health
+            - /bin/sh
+            - -c
+            # - date; echo Hello from the Kubernetes cluster
+            - "curl http://reviews-svc/health"
           restartPolicy: OnFailure
