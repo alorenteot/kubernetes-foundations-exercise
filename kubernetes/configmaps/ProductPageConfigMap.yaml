@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: productpage-configmap
+  namespace: dev
+data:
+  REVIEWS_HOSTNAME: "reviews-svc"
+  DETAILS_HOSTNAME: "details-svc"
+  RATINGS_HOSTNAME: "ratings-svc"

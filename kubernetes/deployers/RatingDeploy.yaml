@@ -18,5 +18,19 @@ spec:
       - name: my-ratings-app
         image: istio/examples-bookinfo-ratings-v1
         resources: {}
+        env:
+        - name: MYSQL_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rating-secret
+              key: MYSQL_DB_PASSWORD
+        - name: MYSQL_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: rating-secret
+              key: MYSQL_DB_USER
+        envFrom:
+        - configMapRef:
+            name: ratings-configmap
       dnsPolicy: ClusterFirst
       restartPolicy: Always

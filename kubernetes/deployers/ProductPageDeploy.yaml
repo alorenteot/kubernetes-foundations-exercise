@@ -19,12 +19,8 @@ spec:
       - name: my-productpage-app
         image: istio/examples-bookinfo-productpage-v1
         resources: {}
-        env:
-        - name: REVIEWS_HOSTNAME
-          value: reviews-svc
-        - name: DETAILS_HOSTNAME
-          value: details-svc
-        - name: RATINGS_HOSTNAME
-          value: ratings-svc
+        envFrom:
+        - configMapRef:
+            name: productpage-configmap
       dnsPolicy: ClusterFirst
       restartPolicy: Always

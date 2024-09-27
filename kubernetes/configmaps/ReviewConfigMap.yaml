@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: review-configmap
+  namespace: dev
+data:
+  RATINGS_HOSTNAME: "ratings-svc"
+  RATINGS_PORT: "9080"

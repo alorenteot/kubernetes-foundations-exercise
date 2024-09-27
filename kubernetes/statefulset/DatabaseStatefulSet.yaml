@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: database-ss
+  namespace: dev
+spec:
+  serviceName: "database"  # Nombre del servicio de cabecera
+  replicas: 1  # Número de réplicas
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+      - name: database
+        image: istio/examples-bookinfo-mysqldb
+        args: ["--default-authentication-plugin", "mysql_native_password"]
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-secret
+              key: MYSQL_ROOT_PASSWORD
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: database-pvc
+          mountPath: /var/lib/mysql
+  volumeClaimTemplates:  # PVCs para almacenamiento persistente
+  - metadata:
+      name: database-pvc
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

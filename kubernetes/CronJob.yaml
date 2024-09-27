@@ -15,6 +15,6 @@ spec:
             command: 
             - /bin/sh
             - -c
-            # - date; echo Hello from the Kubernetes cluster
-            - "curl http://reviews-svc/health"
+            - date; echo Hello from the Kubernetes cluster
+            #- "curl http://reviews-svc/health"
           restartPolicy: OnFailure
